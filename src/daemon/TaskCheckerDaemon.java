@@ -3,6 +3,8 @@ package daemon;
 import java.sql.SQLException;
 
 import infraestructure.FactoryHelper;
+import model.Notificable;
+import sender.BotNotifierSender;
 
 public class TaskCheckerDaemon  implements Runnable {
 
@@ -12,7 +14,7 @@ public class TaskCheckerDaemon  implements Runnable {
 		try {
 			FactoryHelper.dataServices
 			.getTaskDataService().getNotificableList()
-			.forEach(notificable -> System.out.println("Notifying..."));
+			.forEach(notificable -> this.sendNotification(notificable));
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -20,6 +22,11 @@ public class TaskCheckerDaemon  implements Runnable {
 		}
 		System.out.println("End of notificable...");
 		
+	}
+	
+	private void sendNotification(Notificable notificable) {
+		
+		BotNotifierSender.sendNotification(notificable);
 	}
 
 	

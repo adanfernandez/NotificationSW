@@ -1,6 +1,9 @@
 package model;
 
 import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 
 public class Notificable {
 	
@@ -10,7 +13,7 @@ public class Notificable {
 	private long panelId;
 	private String panelName;
 	private long userId;
-	private String phone;
+	private String tgUserId;
 	
 	
 	public long getTaskId() {
@@ -49,11 +52,20 @@ public class Notificable {
 	public void setUserId(long userId) {
 		this.userId = userId;
 	}
-	public String getPhone() {
-		return phone;
+	public String getTgUserId() {
+		return tgUserId;
 	}
-	public void setPhone(String phone) {
-		this.phone = phone;
+	public void setTgUserId(String tgUserId) {
+		this.tgUserId = tgUserId;
+	}
+	
+	
+	public String getNotication() {
+		return "La tarea del panel " + panelName + " está a punto de llegar a la fecha límite!\n"
+				+ "\t- Tarea: " + taskTitle +".\n\t"
+						+ "-Fecha de expiración: " 
+				+ DateFormat.getDateInstance().format(taskExpirationDate) + ".\n";
+		
 	}
 	
 	
