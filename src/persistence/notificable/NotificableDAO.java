@@ -24,9 +24,11 @@ public class NotificableDAO implements NotificableDataService {
 
 	@Override
 	public List<Notificable> getNotificableList() throws SQLException {
-		String query = "SELECT t.id, t.title, t.expirationDate, p.id, p.name, u.id, tg.telegram_id FROM "
-				+ "task t, state s, panel p, user u, telegram tc WHERE t.state_id = s.id AND "
-				+ "s.panel_id = p.id AND p.user_id = tg.user_id AND TIMESTAMPDIFF(MINUTE, t.expirationDate, NOW()) <= u.notification AND t.expirationDate > NOW();";
+		String query = "SELECT t.id, t.title, t.expirationDate, p.id, p.name, u.id, tg.telegram_id "
+				+ "FROM task t, state s, panel p, user u, telegram tc "
+				+ "WHERE t.state_id = s.id AND s.panel_id = p.id "
+				+ "AND p.user_id = tg.user_id AND TIMESTAMPDIFF(MINUTE, t.expirationDate, NOW()) <= u.notification "
+				+ "AND t.expirationDate > NOW() AND NOT u.deleted;";
 		List<Notificable> notificables = new ArrayList<Notificable>();
 		try {
 			PreparedStatement ps = getDbConnection().getConnection().prepareStatement(query);
