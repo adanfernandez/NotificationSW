@@ -11,7 +11,7 @@ public class Notificable {
 	private long panelId;
 	private String panelName;
 	private long userId;
-	private String tgUserId;
+	private long tgUserId;
 	
 	
 	public long getTaskId() {
@@ -50,10 +50,10 @@ public class Notificable {
 	public void setUserId(long userId) {
 		this.userId = userId;
 	}
-	public String getTgUserId() {
+	public long getTgUserId() {
 		return tgUserId;
 	}
-	public void setTgUserId(String tgUserId) {
+	public void setTgUserId(long tgUserId) {
 		this.tgUserId = tgUserId;
 	}
 	

@@ -13,7 +13,14 @@ public interface NotificableDataService {
 	
 	public List<Notificable> getNotificableList() throws SQLException;
 	
+	public long getUserByEmail(String email) throws SQLException;
+	
 	public boolean saveTelegramConfiguration(TelegramConfiguration telegramConfig) throws SQLException;
+
+	public boolean saveNotifyConfiguration(Long chatId, int time) throws SQLException;
+
+	public void markAsNotified(long taskId) throws SQLException;
+
 	
 
 }

@@ -3,7 +3,7 @@ package model;
 public class TelegramConfiguration {
 	
 	private long userId;
-	private String telegramId;
+	private long telegramId;
 	
 	
 	public long getUserId() {
@@ -12,10 +12,10 @@ public class TelegramConfiguration {
 	public void setUserId(long userId) {
 		this.userId = userId;
 	}
-	public String getTelegramId() {
+	public long getTelegramId() {
 		return telegramId;
 	}
-	public void setTelegramId(String telegramId) {
+	public void setTelegramId(long telegramId) {
 		this.telegramId = telegramId;
 	}
 	

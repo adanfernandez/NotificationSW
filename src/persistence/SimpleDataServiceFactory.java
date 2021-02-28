@@ -9,7 +9,7 @@ public class SimpleDataServiceFactory implements DataServiceFactory {
 
 
 	@Override
-	public NotificableDataService getTaskDataService() {
+	public NotificableDataService getNotificableDataService() {
 		return new NotificableDAO();
 	}
 }

@@ -2,9 +2,12 @@ package daemon;
 
 import java.sql.SQLException;
 
+import com.sun.jersey.api.client.Client;
+import com.sun.jersey.api.client.ClientResponse;
+import com.sun.jersey.api.client.WebResource;
+
 import infraestructure.FactoryHelper;
 import model.Notificable;
-import sender.BotNotifierSender;
 
 public class TaskCheckerDaemon  implements Runnable {
 
@@ -13,8 +16,8 @@ public class TaskCheckerDaemon  implements Runnable {
 		System.out.println("Starting looking for notificables...");
 		try {
 			FactoryHelper.dataServices
-			.getTaskDataService().getNotificableList()
-			.forEach(notificable -> this.sendNotification(notificable));
+			.getNotificableDataService().getNotificableList()
+			.forEach(notificable -> this.sendNotification(notificable)); 
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -25,9 +28,17 @@ public class TaskCheckerDaemon  implements Runnable {
 	}
 	
 	private void sendNotification(Notificable notificable) {
+		Client client = Client.create();
+		WebResource wr = client.resource("https://api.telegram.org/bot1606514999:AAFaitiR11wUhVks5myvhRBks4VT9urNdhI/sendmessage");
+		wr.queryParam("chat_id", String.valueOf(notificable.getTgUserId())).queryParam("text", notificable.getNotication()).get(ClientResponse.class);
 		
-		BotNotifierSender.sendNotification(notificable);
+		try {
+			FactoryHelper.dataServices.getNotificableDataService().markAsNotified(notificable.getTaskId());
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
-
 	
 }

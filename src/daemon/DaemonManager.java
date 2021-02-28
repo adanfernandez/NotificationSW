@@ -16,7 +16,8 @@ public class DaemonManager implements ServletContextListener {
 	@Override
 	public void contextInitialized(ServletContextEvent event) {
 	    scheduler = Executors.newSingleThreadScheduledExecutor();
-	   scheduler.scheduleAtFixedRate(new TaskCheckerDaemon(), 0, 5, TimeUnit.SECONDS);
+	    scheduler.execute(new BotDaemon());
+	    scheduler.scheduleAtFixedRate(new TaskCheckerDaemon(), 0, 5, TimeUnit.SECONDS);
 	}
 
 	@Override

@@ -5,6 +5,6 @@ import persistence.notificable.NotificableDataService;
 
 public interface DataServiceFactory {
 	
-	public NotificableDataService getTaskDataService();
+	public NotificableDataService getNotificableDataService();
 		
 }
